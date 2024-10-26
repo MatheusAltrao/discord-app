@@ -46,8 +46,8 @@ app.get('/users/list', async (req, res) => {
 
 // REMOVER USUÁRIO
 
-app.delete('/users/:email', async (req, res) => {
-  const { email } = req.params;
+app.delete('/delete-user', async (req, res) => {
+  const { email } = req.body;
 
   if (!email) {
     return res.status(400).json({ message: 'Nenhum email foi fornecido' });
@@ -75,11 +75,9 @@ app.delete('/users/:email', async (req, res) => {
     );
 
     if (!inviteResponse.data?.members?.length) {
-      return res
-        .status(400)
-        .json({
-          message: `Nenhum usuário no Discord foi encontrado com o convite '${inviteCode}'`,
-        });
+      return res.status(400).json({
+        message: `Nenhum usuário no Discord foi encontrado com o convite '${inviteCode}'`,
+      });
     }
 
     const inviteUserId = inviteResponse.data.members[0].member.user.id;
@@ -96,7 +94,7 @@ app.delete('/users/:email', async (req, res) => {
 
 // CRIAR CONVITE E SALVAR
 
-app.post('/invites', async (req, res) => {
+app.post('/send-invite', async (req, res) => {
   const { email } = req.body;
 
   if (!email) {
