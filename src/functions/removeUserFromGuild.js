@@ -8,8 +8,6 @@ async function removeUserFromGuild(email) {
 
   const inviteCode = user.invite.code;
 
-  console.log(`Removing user ${email} from guild`);
-
   const inviteResponse = await discordApi.post(
     `/guilds/${process.env.DISCORD_GUILD_ID}/members-search`,
     {
@@ -25,8 +23,6 @@ async function removeUserFromGuild(email) {
   if (!inviteResponse.data?.members?.length) return;
 
   const inviteUserId = inviteResponse.data.members[0].member.user.id;
-
-  console.log(`Removing user ${email} with id ${inviteUserId}`);
 
   await discordApi.delete(`/guilds/${process.env.DISCORD_GUILD_ID}/members/${inviteUserId}`);
 }

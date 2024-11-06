@@ -4,7 +4,7 @@ const { discordApi } = require('./lib/discord-api');
 const { User } = require('./models/user');
 const { createInvite } = require('./functions/createInvite');
 const { sendUserInviteMail } = require('./functions/sendUserInviteMail');
-const { removeUserFromGuild } = require('./functions/removeUserFromGuild');
+const { removeUserFromGuild } = require('../src/functions/removeUserFromGuild');
 
 const express = require('express');
 const app = express();
