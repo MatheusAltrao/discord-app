@@ -12,7 +12,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-require('./lib/database');
+require('../src/lib/database');
 
 app.all('/webhook/xgrow', async (req, res) => {
   if (req.method !== 'POST') {
@@ -35,8 +35,8 @@ app.all('/webhook/xgrow', async (req, res) => {
 
       return res.status(200).send({ status: 'ok' });
     } else {
-      await User.deleteOne({ email: subscriber_email });
       await removeUserFromGuild(subscriber_email);
+      await User.deleteOne({ email: subscriber_email });
 
       return res.status(200).send({ status: 'ok' });
     }
